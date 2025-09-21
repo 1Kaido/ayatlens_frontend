@@ -13,7 +13,7 @@
   <h1>Ayatlens</h1>
   <!-- Input Tag for Query-->
   <input id="get_query" type="text">
-  <button id="search_butn" onclick='search_page()'>Search</button>
+  <button id="search_butn">Search</button>
   <!-- Random surah Container -->
   <h3 id="sub-heading">Daily Surah</h3>
   <div id="random_surah_cont">
@@ -114,6 +114,10 @@
     </div>
   </div>
   
-  <script src="main.js"></script>
+  <script type="module" src="./main.js"></script>
+  <script type="module" src="./logic/ui.js"></script>
+  <script type="module" src="./logic/helper.js"></script>
+  <script type="module" src="./logic/service.js"></script>
+  <script type="module" src="./logic/camera.js"></script>
 </body>
 </html>
