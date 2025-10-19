@@ -17,7 +17,7 @@ export function display(data, cont, contClass) {
   const totalBox = document.createElement("h3");
   totalBox.classList.add("totalVerse");
   totalBox.innerText = `Showing Top: ${5}`;
-  //totalBox.innerText = `Showing Top: ${data.results.length}`;
+  //totalBox.innerText = `Showing Top: ${data.results.length}`
   wrapper.appendChild(totalBox);
   
   //for (let i = 0; i < data.results.length; i++) {
