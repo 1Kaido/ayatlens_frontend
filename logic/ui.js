@@ -11,15 +11,17 @@ export function display(data, cont, contClass) {
   
   const queryBox = document.createElement("h1");
   queryBox.classList.add("queryTitle");
-  queryBox.innerText = `Query: ${data.search_keyword || ""}`;
+  queryBox.innerText = `Verse About: ${data.search_keyword || ""}`;
   wrapper.appendChild(queryBox);
   
-  const totalBox = document.createElement("h4");
+  const totalBox = document.createElement("h3");
   totalBox.classList.add("totalVerse");
-  totalBox.innerText = `Total Verse: ${data.results.length}`;
+  totalBox.innerText = `Showing Top: ${5}`;
+  //totalBox.innerText = `Showing Top: ${data.results.length}`;
   wrapper.appendChild(totalBox);
   
-  for (let i = 0; i < data.results.length; i++) {
+  //for (let i = 0; i < data.results.length; i++) {
+  for (let i = 0; i < 5; i++) {
     const ayahContainer = document.createElement("div");
     ayahContainer.classList.add(contClass);
     

@@ -1,50 +1,76 @@
-/* Make body fill the page */
-body, html {
+/* ===== MOBILE-OPTIMIZED CSS ===== */
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 100%;
-  @font-face {
-    font-family: 'montserrat';
-    src: url(/fonts/Montserrat-VariableFont_wght.ttf);
-    
-  }
-  font-family: montserrat;
-  
- /*overflow: hidden;*/
 }
 
-/* Bottom navigation bar */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+
+/* Body improvements */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  padding-bottom: 350px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px; /* Prevents zoom on iOS */
+  line-height: 1.5;
+  background: white;
+  max-width: 360px;
+  margin: 0 auto;
+  position: relative;
+  
+}
+
+/* ===== BOTTOM NAVIGATION ===== */
 #bottomNav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 70px; /* Increased for better touch */
   background: aliceblue;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 1000; /* keep it above all other elements */
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  padding: 0 10px;
+  /* Safe area for notches */
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
-#cameraIcon,#home,#saves{
+/* Touch-friendly navigation icons */
+#cameraIcon, #home, #saves {
   color: white;
   font-size: 18px;
-  height: 30px;
+  min-height: 50px; /* Better touch target */
+  min-width: 50px;
   cursor: pointer;
-  margin-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 12px;
   background: blueviolet;
-  border-radius: 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-/* Camera page */
+#cameraIcon:active, #home:active, #saves:active {
+  transform: scale(0.95);
+  background: #7c3aed; /* Slightly darker purple */
+}
+
+/* ===== CAMERA PAGE ===== */
 #cameraPage {
   position: fixed;
   top: 0;
@@ -52,302 +78,322 @@ body, html {
   right: 0;
   bottom: 0;
   background: black;
-  display: none;/* hidden until camera is opened */
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 100;
 }
 
-/* Fullscreen video */
 #cameraPage video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Snap button */
+/* Improved snap button */
 #snapButton {
   position: absolute;
-  bottom: 80px;
+  bottom: 100px; /* More space from bottom */
   background: white;
   color: black;
-  border: none;
+  border: 4px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   font-size: 16px;
   cursor: pointer;
   z-index: 30;
+  transition: transform 0.1s ease;
 }
 
-/* Captured photo */
+#snapButton:active {
+  transform: scale(0.9);
+  background: #f0f0f0;
+}
+
+/* ===== IMAGE CONTAINERS ===== */
+#capturedImage, #imgConatiner {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  aspect-ratio: 17/20; /* Maintain proportion */
+  border-radius: 12px;
+  margin: 20px auto;
+  display: block;
+}
+
 #capturedImage {
-  height: 400px;
-  width: 340px;
-  border-radius: 10px;
   display: none;
 }
 
-/*Img on homescreen*/
-#imgConatiner{
-  height: 400px;
-  width: 340px;
-  margin-top: 20px;
-  margin-left: 10px;
-  border-radius: 10px;
+#imgConatiner {
   background-color: greenyellow;
+  margin: 20px auto;
 }
 
-/* ###### Ayah Box Style ###### */
-.ayahContainer{
+/* ===== AYAH BOX STYLES ===== */
+.ayahContainer {
   display: block;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-left: 10px;
-  width: 340px;
-  background-color: skyblue;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-.verseKey{
-  display: inline;
-  height: auto;
-  width: auto;
-  margin-left: 10px;
-  border-radius: 5px;
-  background-color: lightgreen;
-}
-.query{
-  display: block;
-  font-size: 25px;
-  font-weight: bold;
-  margin-left: 10px;
-}
-.surah{
-  margin-left:60px;
-  margin-right: 15px;
-  border-radius: 5px;
-  padding: 5px;
-  font-weight: lighter;
-  background-color: lightyellow;
-}
-.save_button{
-  display: inline;
-  height: 10px;
-  width: 10px;
-  background: red;
+  padding: 16px 12px;
+  margin: 0 auto 16px;
+  width: 100%;
+  max-width: 340px;
+  background-color: #e0f2fe; /* Better skyblue */
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-#page{
+.verseKey {
+  display: inline-block;
+  padding: 6px 10px;
+  margin: 0 0 8px 0;
+  border-radius: 6px;
+  background-color: #6B7280;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.query {
+  display: block;
+  font-size: 20px; /* Slightly smaller for mobile */
+  font-weight: 600;
+  margin: 8px 0;
+  line-height: 1.4;
+  color: #1f2937;
+}
+
+.surah {
+  display: inline-block;
+  margin: 8px 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 400;
+  background-color: #fef9c3; /* Better light yellow */
+  color: #854d0e;
+  font-size: 14px;
+}
+
+.save_button {
+  display: inline-block;
+  height: 40px; /* Better touch target */
+  min-width: 60px;
+  padding: 0 12px;
+  background: #16A34A;
+  color: white;
+  border-radius: 8px;
+  margin: 8px 0 0 0;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.save_button:active {
+  background: #15803d;
+}
+
+/* ===== PAGE LAYOUTS ===== */
+#page, #search_result, #obj_result {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: white;
-  visibility: hidden; /* hidden until camera is opened */
-  z-index: 10;
+  visibility: hidden;
+  z-index: 100;
+  overflow-y: auto; /* Enable scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scroll iOS */
 }
-/*Back Button*/
-#back{
+
+/* ===== BACK BUTTON ===== */
+#back {
   color: white;
   background: blueviolet;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 5px;
-  height: 20px;
-  width: 40px;
-  margin-left: 20px;
-  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  min-height: 44px; /* Touch-friendly */
+  min-width: 60px;
+  margin: 16px 0 16px 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
 }
 
-/* Search Box Style */
-#get_query{
-  height: 40px;
-  margin-left: 10px;
-  width: 250px;
-  border-radius: 15px;
-  animation: none;
-}
-#search_butn{
-  height: 45px;
-  border-radius: 15px;
-}
-/*##### Random Surah Surah #####*/
-.random_conatiner{
-  /*min-height: 200px;*/
-  height: auto;
-  width: 340px;
-  background-color: skyblue;
-  margin-left: 10px;
-  margin-top: 10px;
-  border-radius: 15px;
+#back:active {
+  background: #7c3aed;
 }
 
-#sub-heading{
+/* ===== SEARCH STYLES ===== */
+#get_query {
+  height: 48px;
+  width: 100%;
+  max-width: 250px;
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+  padding: 0 16px;
+  font-size: 16px;
+  background: white;
+}
+
+#get_query:focus {
+  outline: none;
+  border-color: blueviolet;
+}
+
+#search_butn {
+  height: 48px;
+  min-width: 70px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background-color: #3B82F6;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#search_butn:active {
+  background-color: #2563eb;
+}
+
+/* ===== RANDOM SURAH ===== */
+.random_conatiner {
+  width: 100%;
+  max-width: 340px;
+  background-color: #e0f2fe;
+  margin: 16px auto;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+#sub-heading {
   padding: 0;
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.random_ayah {
   margin: 0;
-  margin-top: 10px;
-  margin-left: 10px;
+  line-height: 1.6;
 }
 
-.random_ayah{
-  
-  margin-left: 15px;
-  margin-right: 15px;
-}
-.random_ayah_versekey{
-  background: green;
-  margin-top: 20px;
+.random_ayah_versekey {
+  background: #6B7280;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 12px 0;
   display: inline-block;
-  padding: 10px;
-  border-radius: 10px;
-  margin: 10px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-/* ##### Search Page ##### */
-
-#search_result{
-  position: absolute;
-  top: 0;
-  width: 360px;
-  min-height: 600px;
-  height: auto;
-  z-index: 10;
-  background: white;
-  visibility: hidden; /* hidden until camera is opened */
-  
-}
-
-#obj_result{
-  position: absolute;
-  top: 0;
-  width: 360px;
-  height: 120%;
-  z-index: 10;
-  background: white;
-  visibility: hidden; /* hidden until camera is opened */
-}
-
-/* ====== Loader CSS ====== */
+/* ===== LOADER STYLES ===== */
 .app-loader {
   position: fixed;
-  inset: 0;                    /* covers full screen */
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.4); /* dim background */
+  background: rgba(0,0,0,0.5);
   z-index: 9999;
-  visibility: hidden;          /* hidden by default */
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 200ms ease, visibility 200ms ease;
-  pointer-events: none;        /* don't block when hidden */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
 }
 
-/* show by toggling .active */
 .app-loader.active {
   visibility: visible;
   opacity: 1;
-  pointer-events: all;         /* block interactions while visible */
+  pointer-events: all;
 }
 
 .loader-box {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
-  padding: 18px 22px;
+  padding: 20px 24px;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 30px rgba(0,0,0,0.25);
-  min-width: 160px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  min-width: 140px;
 }
 
-/* SVG spinner */
-.spinner {
-  width: 46px;
-  height: 46px;
-  transform-origin: center;
-  animation: rotate 1s linear infinite;
-}
-.spinner .path {
-  stroke: #111;
-  stroke-linecap: round;
-  stroke-dasharray: 90;
-  stroke-dashoffset: 60;
-  animation: dash 1s ease-in-out infinite;
-}
-
-/* label */
-.loader-text {
-  font-size: 14px;
-  color: #111;
-  font-weight: 600;
-  text-align: center;
-}
-
-/* animations */
-@keyframes rotate {
-  100% { transform: rotate(360deg); }
-}
-@keyframes dash {
-  0% {
-    stroke-dashoffset: 90;
-  }
-  50% {
-    stroke-dashoffset: 30;
-    transform: rotate(45deg);
-  }
-  100% {
-    stroke-dashoffset: 90;
-    transform: rotate(360deg);
-  }
-}
-
-/* small responsive tweak */
-@media (max-width:420px){
-  .loader-box { min-width: 140px; padding: 14px; }
-  .loader-text { font-size: 13px; }
-}
-
+/* ===== ERROR BOX ===== */
 .error-box {
-  display: none;
   position: fixed;
   top: 20px;
-  right: 20px;
-  background: #f44336; /* red background */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f44336;
   color: white;
-  padding: 12px 18px;
-  border-radius: 8px;
+  padding: 14px 20px;
+  border-radius: 12px;
   font-size: 14px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 10000;
   animation: fadeIn 0.3s ease-in-out;
-  align-items: center; /* makes text & button aligned */
+  display: none;
+  align-items: center;
+  max-width: 320px;
+  width: 90%;
 }
 
-.error-box button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  margin-left: 10px;
-  cursor: pointer;
+/* ===== UTILITY CLASSES ===== */
+.beta-notice {
+  background: #FEF3CD;
+  border: 1px solid #F59E0B;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px auto;
+  font-size: 14px;
+  text-align: center;
+  max-width: 340px;
+  color: #92400e;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Center containers horizontally */
+.ayahContainer, .random_conatiner, #imgConatiner, .beta-notice {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-#note{
-  background: lightblue;
-  margin-left: 10px;
-  width: 320px;
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 30px;
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 360px) {
+  body {
+    padding: 0 8px;
+  }
+  
+  .ayahContainer, .random_conatiner, #imgConatiner {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  #bottomNav {
+    border-radius: 0;
+  }
+}
+
+/* Safe area support for newer iPhones */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(8px, env(safe-area-inset-left));
+    padding-right: max(8px, env(safe-area-inset-right));
+  }
 }
